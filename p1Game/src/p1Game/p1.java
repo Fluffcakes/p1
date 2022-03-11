@@ -78,10 +78,11 @@ public class p1 {
 		boolean[][] visit = new boolean [rows * rooms][cols];
 		
 		//for () {
-		int num = 0;
 			while (cake == false && full == false) {
-				dequeue.add(enqueue.remove());
-				dequeue2.add(enqueue2.remove());
+				startX = enqueue.remove();
+				startY = enqueue2.remove();
+				dequeue.add(startX);
+				dequeue2.add(startY);
 				dequeueChar.add(enqueueChar.remove());
 					if (!(startX - 1 < 0 || coordinate[startX - 1][startY] == '@' || visit[startX - 1][startY] == true)) {
 						enqueue.add(startX - 1);
@@ -93,7 +94,7 @@ public class p1 {
 						if (coordinate[startX - 1][startY] == 'C') {
 							visit[startX - 1][startY] = true;
 						}
-						System.out.println(num++);
+						System.out.println(startX - 1 + " " + startY);
 					}
 					if (!(startX + 1 >= coordinate.length || coordinate[startX + 1][startY] == '@' || visit[startX + 1][startY] == true)) {
 						enqueue.add(startX + 1);
@@ -105,7 +106,7 @@ public class p1 {
 						if (coordinate[startX + 1][startY] == 'C') {
 							visit[startX + 1][startY] = true;
 						}
-						System.out.println(num++);
+						System.out.println(startX + 1 + " " + startY);
 					}
 					if (!(startY + 1 >= coordinate[0].length || coordinate[startX][startY + 1] == '@' || visit[startX][startY + 1] == true)) {
 						enqueue.add(startX);
@@ -117,7 +118,8 @@ public class p1 {
 						if (coordinate[startX][startY + 1] == 'C') {
 							visit[startX][startY + 1] = true;
 						}
-						System.out.println(num++);
+						int bob = startY + 1;
+						System.out.println(startX + " " + bob);
 					}
 					if (!(startY - 1 < 0 || coordinate[startX][startY - 1] == '@' || visit[startX][startY - 1] == true)) {
 						enqueue.add(startX);
@@ -129,7 +131,8 @@ public class p1 {
 						if (coordinate[startX][startY - 1] == 'C') {
 							visit[startX][startY - 1] = true;
 						}
-						System.out.println(num++);
+						int bob = startY - 1;
+						System.out.println(startX + " " + bob);
 					}
 				}
 				
