@@ -1,4 +1,4 @@
-package p1Game;
+package p1;
 
 class Node<T>{
     private T data;

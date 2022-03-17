@@ -1,4 +1,4 @@
-package p1Game;
+package p1;
 
 import java.util.Stack;
 

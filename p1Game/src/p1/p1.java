@@ -1,4 +1,4 @@
-package p1Game;
+package p1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +19,14 @@ public class p1 {
 	private static boolean full = false;
 	
 	public static void main(String[] args) throws FileNotFoundException {
+		
+		/*how to do the thing: 
+		 * right click folder and click properties
+		 * click the button thing
+		 * for zipping folders right click
+		 * click send-to
+		 * compressed folder
+		 * just do src folder?*/
 		
 		Scanner scanner;
 		File f = new File("map1.txt");
@@ -79,6 +87,7 @@ public class p1 {
 		
 		//for () {
 			while (cake == false && full == false) {
+				visit[startX][startY] = true;
 				startX = enqueue.remove();
 				startY = enqueue2.remove();
 				dequeue.add(startX);
@@ -91,9 +100,7 @@ public class p1 {
 						if (coordinate[startX - 1][startY] == 'C') {
 							cake = true;
 						}
-						if (coordinate[startX - 1][startY] == 'C') {
-							visit[startX - 1][startY] = true;
-						}
+						visit[startX - 1][startY] = true;
 						System.out.println(startX - 1 + " " + startY);
 					}
 					if (!(startX + 1 >= coordinate.length || coordinate[startX + 1][startY] == '@' || visit[startX + 1][startY] == true)) {
@@ -103,9 +110,7 @@ public class p1 {
 						if (coordinate[startX + 1][startY] == 'C') {
 							cake = true;
 						}
-						if (coordinate[startX + 1][startY] == 'C') {
-							visit[startX + 1][startY] = true;
-						}
+						visit[startX + 1][startY] = true;
 						System.out.println(startX + 1 + " " + startY);
 					}
 					if (!(startY + 1 >= coordinate[0].length || coordinate[startX][startY + 1] == '@' || visit[startX][startY + 1] == true)) {
@@ -115,9 +120,7 @@ public class p1 {
 						if (coordinate[startX][startY + 1] == 'C') {
 							cake = true;
 						}
-						if (coordinate[startX][startY + 1] == 'C') {
-							visit[startX][startY + 1] = true;
-						}
+						visit[startX][startY + 1] = true;
 						int bob = startY + 1;
 						System.out.println(startX + " " + bob);
 					}
@@ -128,9 +131,7 @@ public class p1 {
 						if (coordinate[startX][startY - 1] == 'C') {
 							cake = true;
 						}
-						if (coordinate[startX][startY - 1] == 'C') {
-							visit[startX][startY - 1] = true;
-						}
+						visit[startX][startY - 1] = true;
 						int bob = startY - 1;
 						System.out.println(startX + " " + bob);
 					}
