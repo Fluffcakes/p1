@@ -15,6 +15,8 @@ public class p1 {
 	private static int rows = 0;
 	private static int cols = 0;
 	private static int rooms = 0;
+	private static int endX = 0;
+	private static int endY = 0;
 	private static boolean cake = false;
 	private static boolean full = false;
 	
@@ -25,8 +27,7 @@ public class p1 {
 		 * click the button thing
 		 * for zipping folders right click
 		 * click send-to
-		 * compressed folder
-		 * just do src folder?*/
+		 * compressed folder*/
 		
 		Scanner scanner;
 		File f = new File("map1.txt");
@@ -68,6 +69,27 @@ public class p1 {
 				System.out.println();
 			}
 			
+			queueBased(coordinate);
+			
+			//K
+			/*System.out.println(dequeue.remove());
+			System.out.println(dequeue2.remove());
+			System.out.println(dequeueChar.remove());*/
+			for (int i = 0; i < dequeue.size() + 10; i++) {
+				System.out.print(dequeue.remove());
+				System.out.print(dequeue2.remove());
+				System.out.println(dequeueChar.remove());
+			}
+			for (int i = 0; i < enqueue.size() + 10; i++) {
+				System.out.print(enqueue.remove());
+				System.out.print(enqueue2.remove());
+				System.out.println(enqueueChar.remove());
+			}
+			
+			
+		}
+	
+	public static void queueBased(char[][] coordinate) {
 		int startX = 0;
 		int startY = 0;
 		
@@ -85,61 +107,78 @@ public class p1 {
 		
 		boolean[][] visit = new boolean [rows * rooms][cols];
 		
-		//for () {
-			while (cake == false && full == false) {
-				visit[startX][startY] = true;
-				startX = enqueue.remove();
-				startY = enqueue2.remove();
-				dequeue.add(startX);
-				dequeue2.add(startY);
-				dequeueChar.add(enqueueChar.remove());
-					if (!(startX - 1 < 0 || coordinate[startX - 1][startY] == '@' || visit[startX - 1][startY] == true)) {
-						enqueue.add(startX - 1);
-						enqueue2.add(startY);
-						enqueueChar.add(coordinate[startX - 1][startY]);
-						if (coordinate[startX - 1][startY] == 'C') {
-							cake = true;
-						}
-						visit[startX - 1][startY] = true;
-						System.out.println(startX - 1 + " " + startY);
-					}
-					if (!(startX + 1 >= coordinate.length || coordinate[startX + 1][startY] == '@' || visit[startX + 1][startY] == true)) {
-						enqueue.add(startX + 1);
-						enqueue2.add(startY);
-						enqueueChar.add(coordinate[startX + 1][startY]);
-						if (coordinate[startX + 1][startY] == 'C') {
-							cake = true;
-						}
-						visit[startX + 1][startY] = true;
-						System.out.println(startX + 1 + " " + startY);
-					}
-					if (!(startY + 1 >= coordinate[0].length || coordinate[startX][startY + 1] == '@' || visit[startX][startY + 1] == true)) {
-						enqueue.add(startX);
-						enqueue2.add(startY + 1);
-						enqueueChar.add(coordinate[startX][startY + 1]);
-						if (coordinate[startX][startY + 1] == 'C') {
-							cake = true;
-						}
-						visit[startX][startY + 1] = true;
-						int bob = startY + 1;
-						System.out.println(startX + " " + bob);
-					}
-					if (!(startY - 1 < 0 || coordinate[startX][startY - 1] == '@' || visit[startX][startY - 1] == true)) {
-						enqueue.add(startX);
-						enqueue2.add(startY - 1);
-						enqueueChar.add(coordinate[startX][startY - 1]);
-						if (coordinate[startX][startY - 1] == 'C') {
-							cake = true;
-						}
-						visit[startX][startY - 1] = true;
-						int bob = startY - 1;
-						System.out.println(startX + " " + bob);
-					}
+		visit[startX][startY] = true;
+		
+		while (cake == false && full == false) {
+			startX = enqueue.remove();
+			startY = enqueue2.remove();
+			dequeue.add(startX);
+			dequeue2.add(startY);
+			dequeueChar.add(enqueueChar.remove());
+			//north
+			if (!(startX - 1 < 0 || coordinate[startX - 1][startY] == '@' || visit[startX - 1][startY] == true)) {
+				enqueue.add(startX - 1);
+				enqueue2.add(startY);
+				enqueueChar.add(coordinate[startX - 1][startY]);
+				if (coordinate[startX - 1][startY] == 'C') {
+					cake = true;
+					dequeue.add(startX - 1);
+					dequeue2.add(startY);
+					dequeueChar.add('C');
 				}
-				
-				System.out.println("found it");
+				visit[startX - 1][startY] = true;
+				/*System.out.println(startX - 1 + " " + startY);*/
 			}
-	//}
+			//south
+			if (!(startX + 1 >= coordinate.length || coordinate[startX + 1][startY] == '@' || visit[startX + 1][startY] == true)) {
+				enqueue.add(startX + 1);
+				enqueue2.add(startY);
+				enqueueChar.add(coordinate[startX + 1][startY]);
+				if (coordinate[startX + 1][startY] == 'C') {
+					cake = true;
+					dequeue.add(startX + 1);
+					dequeue2.add(startY);
+					dequeueChar.add('C');
+				}
+				visit[startX + 1][startY] = true;
+				/*System.out.println(startX + 1 + " " + startY);*/
+			}
+			//east
+			if (!(startY + 1 >= coordinate[0].length || coordinate[startX][startY + 1] == '@' || visit[startX][startY + 1] == true)) {
+				enqueue.add(startX);
+				enqueue2.add(startY + 1);
+				enqueueChar.add(coordinate[startX][startY + 1]);
+				if (coordinate[startX][startY + 1] == 'C') {
+					cake = true;
+					dequeue.add(startX);
+					dequeue2.add(startY + 1);
+					dequeueChar.add('C');
+				}
+				visit[startX][startY + 1] = true;
+				/*int bob = startY + 1;
+				System.out.println(startX + " " + bob);*/
+			}
+			//west
+			if (!(startY - 1 < 0 || coordinate[startX][startY - 1] == '@' || visit[startX][startY - 1] == true)) {
+				enqueue.add(startX);
+				enqueue2.add(startY - 1);
+				enqueueChar.add(coordinate[startX][startY - 1]);
+				if (coordinate[startX][startY - 1] == 'C') {
+					cake = true;
+					dequeue.add(startX);
+					dequeue2.add(startY - 1);
+					dequeueChar.add('C');
+				}
+				visit[startX][startY - 1] = true;
+				/*int bob = startY - 1;
+				System.out.println(startX + " " + bob);*/
+			}
+		}
+			
+		System.out.println("found it");
+			
+		//System.exit(-1); ?!?!?!
+	}
 	
 	public static void coordinateBased(Scanner scan) {
 		
@@ -201,3 +240,6 @@ public class p1 {
 	}
 
 }
+
+
+

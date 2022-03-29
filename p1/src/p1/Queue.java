@@ -31,6 +31,7 @@ public class Queue<T>{
       {
           return null;
       }
+      size--;
       return out.pop();
       /*if (out.size() == 0 && in.size() == 0) {
           return null;
@@ -55,6 +56,7 @@ public class Queue<T>{
       while (in.size() != 0) {
           out.push(in.pop());
       }
+      size++;
       /*if (out.size() == 0) {
           in.push(el);
           size++;
