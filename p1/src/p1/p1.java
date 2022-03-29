@@ -26,7 +26,7 @@ public class p1 {
 		 * right click folder and click properties
 		 * click the button thing
 		 * for zipping folders right click
-		 * click send-to
+		 * click send-to 
 		 * compressed folder*/
 		
 		Scanner scanner;
